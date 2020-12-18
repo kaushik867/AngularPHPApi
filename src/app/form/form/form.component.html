@@ -1,0 +1,26 @@
+<div class="container px-5 py-5">
+    <form #userForm="ngForm" id="regform" (submit)="FormSubmit(userForm)">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" required pattern="^[a-zA-Z ]+[,\.'\-]?[a-zA-Z ]+$" #name="ngModel" class="form-control" [class.is-invalid]="name.invalid && name.touched"
+             [class.is-valid]="name.valid" name="name" id="name" placeholder="Enter you name" ngModel>
+                <small [class.d-none]="name.valid || name.untouched">name is required and must be an apphabet</small>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" #email="ngModel" required pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" [class.is-valid]="email.valid"
+            [class.is-invalid]="email.invalid && email.touched" class="form-control" name="email" id="email" placeholder="Enter you Email" ngModel>
+            <small [class.d-none]="email.valid || email.untouched">email is required with .(dot) and @ (eg. example@domail.com)</small>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone number</label>
+            <input type="text" required #phone="ngModel" pattern="^\d{10}$" [class.is-invalid]="phone.invalid && phone.touched" [class.is-valid]="phone.valid"
+            class="form-control" name="phone" id="phone" placeholder="Enter your phone" ngModel>
+            <div *ngIf="phone.errors && (phone.invalid && phone.touched)">
+                <small *ngIf="phone.errors.required">phone is required and contains number only</small>
+                <small *ngIf="phone.errors.pattern">must be 10 digits</small>
+              </div>
+        </div>
+        <button type="submit" [disabled]="userForm.invalid" mat-raised-button color="primary">submit</button>
+   </form>
+</div>

@@ -1,0 +1,38 @@
+<app-header></app-header>
+<app-form></app-form>
+
+<div class="container px-5 py-5" *ngIf="error; else elseblock">
+  <h3> {{msg}}</h3>
+</div>
+<ng-template #elseblock>
+<div class="container px-5 py-5">{{msg}}
+  <form #formdata="ngForm">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Sl no.</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let cust of customer; index as i">
+        <th scope="row">{{i+1}}</th>
+        <td>{{cust.name}}</td>
+        <td>{{cust.email}}</td>
+        <td>{{cust.phone}}</td>
+        <td>
+          <button mat-raised-button [disabled]="disablebtn" class="mr-3" color="warn" (click)="delete(cust.id)">Delete</button>
+          <button type="submit" mat-raised-button color="primary" (click)="delete(cust.id)">Modify</button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>
+  </form>
+</div>
+</ng-template>
+
+  
